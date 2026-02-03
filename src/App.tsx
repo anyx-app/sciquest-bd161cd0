@@ -4,9 +4,7 @@ import { AppShell } from './components/layout/AppShell';
 import Dashboard from './pages/Dashboard';
 import Experiments from './pages/Experiments';
 import Journal from './pages/Journal';
-
-// Placeholder components for routes that will be implemented later
-const Achievements = () => <div className="p-10 text-slate-600">Achievements Page (Coming Soon)</div>;
+import Achievements from './pages/Achievements';
 
 function App() {
   return (
