@@ -31,3 +31,13 @@ Sections/Features:
 
 UI: Vibrant and playful like National Geographic Kids - 3D animated experiments, interactive quizzes. Card-based layout with engaging visuals and easy navigation.
 
+
+## {anyx 490a8406-6399-4162-ab96-b534904c18f9} - 2026-02-03 11:23:37
+
+Commit: `HEAD`
+Branch: `feature/490a8406-6399-4162-ab96-b534904c18f9`
+
+Added Experiments page with Volcano and Solar System simulations. Updated App.tsx to include /experiments route.
+
+---
+
