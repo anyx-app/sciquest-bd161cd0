@@ -1,13 +1,17 @@
+import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import App from './App.tsx'
 import './index.css'
-import { ErrorBoundary } from './components/ErrorBoundary'
-
-// Initialize console logger (must be before any other imports that might log)
+import App from './App.tsx'
 import './lib/console-logger'
+import { ErrorBoundary } from './components/ErrorBoundary'
+import { BrowserRouter } from 'react-router-dom'
 
-createRoot(document.getElementById("root")!).render(
-  <ErrorBoundary>
-    <App />
-  </ErrorBoundary>
-);
+createRoot(document.getElementById('root')!).render(
+  <StrictMode>
+    <ErrorBoundary>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </ErrorBoundary>
+  </StrictMode>,
+)
