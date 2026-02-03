@@ -3,9 +3,9 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import { AppShell } from './components/layout/AppShell';
 import Dashboard from './pages/Dashboard';
 import Experiments from './pages/Experiments';
+import Journal from './pages/Journal';
 
 // Placeholder components for routes that will be implemented later
-const Journal = () => <div className="p-10 text-slate-600">Journal Page (Coming Soon)</div>;
 const Achievements = () => <div className="p-10 text-slate-600">Achievements Page (Coming Soon)</div>;
 
 function App() {
