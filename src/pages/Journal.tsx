@@ -3,6 +3,8 @@ import { Plus } from 'lucide-react';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { JournalEntryCard } from '@/components/recipes/journal/JournalEntryCard';
+import { JournalEditor, JournalFormValues } from '@/components/recipes/journal/JournalEditor';
+import { toast } from 'sonner';
 
 // Mock data for journal entries
 const MOCK_ENTRIES = [
@@ -33,7 +35,22 @@ const MOCK_ENTRIES = [
 ];
 
 export default function Journal() {
-  const [entries] = useState(MOCK_ENTRIES);
+  const [entries, setEntries] = useState(MOCK_ENTRIES);
+  const [isEditorOpen, setIsEditorOpen] = useState(false);
+
+  const handleCreateEntry = (values: JournalFormValues) => {
+    const newEntry = {
+      id: entries.length + 1,
+      title: values.title,
+      date: values.date.toISOString().split('T')[0], // Simple date format
+      snippet: values.content.length > 100 ? values.content.substring(0, 100) + "..." : values.content,
+      category: values.category,
+      mood: values.mood
+    };
+    
+    setEntries([newEntry, ...entries]);
+    toast.success("Journal entry saved!");
+  };
 
   return (
     <div className="space-y-8">
@@ -42,7 +59,10 @@ export default function Journal() {
           <h1 className="text-3xl font-bold tracking-tight text-slate-900">My Science Journal</h1>
           <p className="mt-2 text-slate-600">Record your observations and discoveries.</p>
         </div>
-        <Button className="bg-[#FF6F61] hover:bg-[#FF6F61]/90 text-white gap-2">
+        <Button 
+          onClick={() => setIsEditorOpen(true)}
+          className="bg-[#FF6F61] hover:bg-[#FF6F61]/90 text-white gap-2"
+        >
           <Plus className="h-4 w-4" />
           New Entry
         </Button>
@@ -54,7 +74,10 @@ export default function Journal() {
         ))}
 
         {/* Empty State / Add New Placeholder */}
-        <Card className="flex flex-col items-center justify-center border-dashed border-2 border-slate-200 bg-slate-50/50 hover:bg-slate-50 hover:border-[#FF6F61]/50 transition-all cursor-pointer h-full min-h-[200px]">
+        <Card 
+          onClick={() => setIsEditorOpen(true)}
+          className="flex flex-col items-center justify-center border-dashed border-2 border-slate-200 bg-slate-50/50 hover:bg-slate-50 hover:border-[#FF6F61]/50 transition-all cursor-pointer h-full min-h-[200px]"
+        >
           <div className="flex h-12 w-12 items-center justify-center rounded-full bg-white shadow-sm mb-4">
             <Plus className="h-6 w-6 text-[#FF6F61]" />
           </div>
@@ -62,6 +85,12 @@ export default function Journal() {
           <p className="text-sm text-slate-500 mt-1">What did you learn today?</p>
         </Card>
       </div>
+
+      <JournalEditor 
+        open={isEditorOpen} 
+        onOpenChange={setIsEditorOpen} 
+        onSubmit={handleCreateEntry} 
+      />
     </div>
   );
 }
